@@ -11,4 +11,4 @@ page-layout: full
 title-block-banner: true
 ---
 
-
+터미널, 파이썬 인터프리터, 주피터 인터프리터 스타트 뭐시기를 같은 가상환경으로 맞추기

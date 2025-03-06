@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs #결과물을 해당 폴더 안에 저장해줘라는 뜻뜻
 
 website:
   title: "newhee-blog"
