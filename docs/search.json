@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "newhee-blog",
     "section": "",
-    "text": "터미널, 파이썬 인터프리터, 주피터 인터프리터 스타트 뭐시기를 같은 가상환경으로 맞추기\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 6, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 3, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "터미널, 파이썬 인터프리터, 주피터 인터프리터 스타트 뭐시기를 같은 가상환경으로 맞추기\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n팔머펭귄 데이터분석\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 3, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -16,8 +16,43 @@
   {
     "objectID": "posts/post-with-code/index.html",
     "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "title": "팔머펭귄 데이터분석",
     "section": "",
-    "text": "This is a post with executable code.\n\nimport numpy as np\n\na= np.arange(10)\na\n\narray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])"
+    "text": "문제 정의\n팔머 펭귄 데이터 파악\n종별 특징 파악\n결론\n\n\n\n\n\n팔머 펭귄 데이터를 통해 각 종별의 특징에 대해 알아보고자 한다.\n\n각각의 종의 특성을 파악하여 어떻게 개별 관리를 하는 것이 좋을지 의논하기 위해 해당 분석 과제를 실행하고자 한다.\n\n\n\n\n\n\n\n\nNo.\nCol\nDtype\n\n\n\n\n1\n종 species\nobject\n\n\n2\n서식지 island\nobject\n\n\n3\n부리 길이 bill_length_mm\nfloat64\n\n\n4\n부리 깊이 bill_depth_mm\nfloat64\n\n\n5\n날개 길이 flipper_length_mm\nfloat64\n\n\n6\n몸무게 body_mass_g\nfloat64\n\n\n7\n성별 sex\nobject\n\n\n8\n관측년도 year\nint64\n\n\n\n\n\n\n\n\n- 총 343개의 데이터를 확인할 수 있으며, 총 8개의 컬럼으로 구성되어 있음\n\n\nCode\nimport pandas as pd \nimport numpy as np\nfrom palmerpenguins import load_penguins\n\npeng = load_penguins()\n\npeng.head()\npeng.info()\n\n\n\n\n\n- Adelie, Gentoo, Chinstrap 종이 각각 152, 124, 68마리 데이터가 있는 것을 확인됨\n\n\nCode\npenguins['species'].value_counts()\n\n\n\n\n\n\n부리의 길이, 부리의 깊이, 날개의 길이, 몸무게, 성별에 결측값 존재.\n해당 결측치가 같은 행에 있음\n성별을 제외한 나머지 결측값이 같은 행에 있어, 그 행들을 제외하고 분석 수행.\n\n\n\nCode\npenguins.isna().sum()\npenguins\n\npenguins[penguins['bill_length_mm'].isna()]\n\nnew_penguins = penguins[~penguins['bill_length_mm'].isna()]\n\n\n\n\n\n\n\n\n\n\n\nCode\nAdelie_peng = new_penguins.loc[new_penguins['species'] == 'Adelie']\nGentoo_peng = new_penguins.loc[new_penguins['species'] == 'Gentoo']\nChinstrap_peng = new_penguins.loc[new_penguins['species'] == 'Chinstrap']\n\n\n\n\n\n\nAdelie는 Dream, Torgersen, Biscoe 지역에 서식하며, gentoo는 Biscoe, Chinstrap는 Dream에 서식하고 있음\n\n\n\nCode\nAdelie_peng['island'].value_counts().rename('Adelie')\nGentoo_peng['island'].value_counts().rename('Gentoo')\nChinstrap_peng['island'].value_counts().rename('Chinstrap')\n\n\n\n\n\n\nAdelie 가 평균적으로 부리길이가 작은 편에 속하고, 지느러미가 짧은 편임. - gentoo가 평균적으로 부리의 길이에 비해 폭이 길고 무게가 상대적으로 조금 더 나가는 편이고 지느러미 길이가 큰 편이고 평균적으로 몸무게도 제일 많이 나감\nChinstrap는 지느러미 길이에서 표준편차가 큰 편이었음\n\n\n\nCode\nAdelie_peng.describe(),'\\n'   # Adelie의 기술통계량\nGentoo_peng.describe(),'\\n'   # Gentoo 기술통계량\nChinstrap_peng.describe(),'\\n' # Chinstrap 기술통계량\n\npd.concat([Adelie_peng.describe(), Gentoo_peng.describe(), Chinstrap_peng.describe()],keys=['Adelie','Gentoo','Chinstrap'])\n\n\n\n\n\n\n\n\n\n\n\n\n펭귄 평균\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\n38.791391\n18.346358\n189.953642\n3700.662252\n\n\ngentoo\n47.504878\n14.982114\n217.186992\n5076.016260\n\n\nChinstrap\n48.833824\n18.420588\n195.823529\n3733.088235\n\n\n\n\n\n\n\n\n\n\n\n\n\n펭귄 최소\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\n32.100000\n15.500000\n172.000000\n2850.000000\n\n\ngentoo\n40.900000\n13.100000\n203.000000\n3950.000000\n\n\nChinstrap\n40.900000\n16.40000\n178.000000\n2700.00000\n\n\n\n\n\n\n\n\n\n\n\n\n\n펭귄 최대\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\n46.000000\n21.500000\n210.000000\n4775.000000\n\n\ngentoo\n59.600000\n17.300000\n231.000000\n6300.000000\n\n\nChinstrap\n58.000000\n20.800000\n212.000000\n4800.000000\n\n\n\n\n\n\n\n각 종별 성별 개체 수 차이는 크게 나지 않음\n\n\n\nCode\nAdelie_peng['sex'].value_counts().rename('Adelie')\nGentoo_peng['sex'].value_counts().rename('Gentoo')\nChinstrap_peng['sex'].value_counts().rename('Chinstrap')\n\n\n\n\n\n\n가장 많이 관찰된 년도는 Adelie는 2009년, gentoo 2008년,Chinstrap는 2007년에 가장 많았음\n\n\n\nCode\nAdelie_peng['year'].value_counts().rename('Adelie')\nGentoo_peng['year'].value_counts().rename('Gentoo')\nChinstrap_peng['year'].value_counts().rename('Chinstrap')\n\n\n\n\n\n\n\n각 종별 성별을 비교를 했을때 개체수의 차이가 크게 나지 않았음\nAdelie는 다른 객체들에 비해 전반적으로 크기가 작은 편에 속하며, Gentoo는 몸집이 크고 지느러미가 큰 편에 속하며, Chinstrap은 Adelie보다 큰편이라고 볼 수 있음 이를 바탕으로 각 개체별 구분을 짓는 기준으로 몸무게, 지느러미, 부리순으로 평균 기준으로 진행하는 것이 합리적이다 볼 수 있음음\n각 종별 서식지를 기준으로 종별 관리가 필요함"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#목차",
+    "href": "posts/post-with-code/index.html#목차",
+    "title": "팔머펭귄 데이터분석",
+    "section": "",
+    "text": "문제 정의\n팔머 펭귄 데이터 파악\n종별 특징 파악\n결론"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#문제-정의",
+    "href": "posts/post-with-code/index.html#문제-정의",
+    "title": "팔머펭귄 데이터분석",
+    "section": "",
+    "text": "팔머 펭귄 데이터를 통해 각 종별의 특징에 대해 알아보고자 한다.\n\n각각의 종의 특성을 파악하여 어떻게 개별 관리를 하는 것이 좋을지 의논하기 위해 해당 분석 과제를 실행하고자 한다."
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#팔머-펭귄-데이터-파악",
+    "href": "posts/post-with-code/index.html#팔머-펭귄-데이터-파악",
+    "title": "팔머펭귄 데이터분석",
+    "section": "",
+    "text": "No.\nCol\nDtype\n\n\n\n\n1\n종 species\nobject\n\n\n2\n서식지 island\nobject\n\n\n3\n부리 길이 bill_length_mm\nfloat64\n\n\n4\n부리 깊이 bill_depth_mm\nfloat64\n\n\n5\n날개 길이 flipper_length_mm\nfloat64\n\n\n6\n몸무게 body_mass_g\nfloat64\n\n\n7\n성별 sex\nobject\n\n\n8\n관측년도 year\nint64\n\n\n\n\n\n\n\n\n- 총 343개의 데이터를 확인할 수 있으며, 총 8개의 컬럼으로 구성되어 있음\n\n\nCode\nimport pandas as pd \nimport numpy as np\nfrom palmerpenguins import load_penguins\n\npeng = load_penguins()\n\npeng.head()\npeng.info()\n\n\n\n\n\n- Adelie, Gentoo, Chinstrap 종이 각각 152, 124, 68마리 데이터가 있는 것을 확인됨\n\n\nCode\npenguins['species'].value_counts()\n\n\n\n\n\n\n부리의 길이, 부리의 깊이, 날개의 길이, 몸무게, 성별에 결측값 존재.\n해당 결측치가 같은 행에 있음\n성별을 제외한 나머지 결측값이 같은 행에 있어, 그 행들을 제외하고 분석 수행.\n\n\n\nCode\npenguins.isna().sum()\npenguins\n\npenguins[penguins['bill_length_mm'].isna()]\n\nnew_penguins = penguins[~penguins['bill_length_mm'].isna()]"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#종별-특징-파악",
+    "href": "posts/post-with-code/index.html#종별-특징-파악",
+    "title": "팔머펭귄 데이터분석",
+    "section": "",
+    "text": "Code\nAdelie_peng = new_penguins.loc[new_penguins['species'] == 'Adelie']\nGentoo_peng = new_penguins.loc[new_penguins['species'] == 'Gentoo']\nChinstrap_peng = new_penguins.loc[new_penguins['species'] == 'Chinstrap']\n\n\n\n\n\n\nAdelie는 Dream, Torgersen, Biscoe 지역에 서식하며, gentoo는 Biscoe, Chinstrap는 Dream에 서식하고 있음\n\n\n\nCode\nAdelie_peng['island'].value_counts().rename('Adelie')\nGentoo_peng['island'].value_counts().rename('Gentoo')\nChinstrap_peng['island'].value_counts().rename('Chinstrap')\n\n\n\n\n\n\nAdelie 가 평균적으로 부리길이가 작은 편에 속하고, 지느러미가 짧은 편임. - gentoo가 평균적으로 부리의 길이에 비해 폭이 길고 무게가 상대적으로 조금 더 나가는 편이고 지느러미 길이가 큰 편이고 평균적으로 몸무게도 제일 많이 나감\nChinstrap는 지느러미 길이에서 표준편차가 큰 편이었음\n\n\n\nCode\nAdelie_peng.describe(),'\\n'   # Adelie의 기술통계량\nGentoo_peng.describe(),'\\n'   # Gentoo 기술통계량\nChinstrap_peng.describe(),'\\n' # Chinstrap 기술통계량\n\npd.concat([Adelie_peng.describe(), Gentoo_peng.describe(), Chinstrap_peng.describe()],keys=['Adelie','Gentoo','Chinstrap'])\n\n\n\n\n\n\n\n\n\n\n\n\n펭귄 평균\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\n38.791391\n18.346358\n189.953642\n3700.662252\n\n\ngentoo\n47.504878\n14.982114\n217.186992\n5076.016260\n\n\nChinstrap\n48.833824\n18.420588\n195.823529\n3733.088235\n\n\n\n\n\n\n\n\n\n\n\n\n\n펭귄 최소\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\n32.100000\n15.500000\n172.000000\n2850.000000\n\n\ngentoo\n40.900000\n13.100000\n203.000000\n3950.000000\n\n\nChinstrap\n40.900000\n16.40000\n178.000000\n2700.00000\n\n\n\n\n\n\n\n\n\n\n\n\n\n펭귄 최대\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\n\n\n\n\nAdelie\n46.000000\n21.500000\n210.000000\n4775.000000\n\n\ngentoo\n59.600000\n17.300000\n231.000000\n6300.000000\n\n\nChinstrap\n58.000000\n20.800000\n212.000000\n4800.000000\n\n\n\n\n\n\n\n각 종별 성별 개체 수 차이는 크게 나지 않음\n\n\n\nCode\nAdelie_peng['sex'].value_counts().rename('Adelie')\nGentoo_peng['sex'].value_counts().rename('Gentoo')\nChinstrap_peng['sex'].value_counts().rename('Chinstrap')\n\n\n\n\n\n\n가장 많이 관찰된 년도는 Adelie는 2009년, gentoo 2008년,Chinstrap는 2007년에 가장 많았음\n\n\n\nCode\nAdelie_peng['year'].value_counts().rename('Adelie')\nGentoo_peng['year'].value_counts().rename('Gentoo')\nChinstrap_peng['year'].value_counts().rename('Chinstrap')"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#결론",
+    "href": "posts/post-with-code/index.html#결론",
+    "title": "팔머펭귄 데이터분석",
+    "section": "",
+    "text": "각 종별 성별을 비교를 했을때 개체수의 차이가 크게 나지 않았음\nAdelie는 다른 객체들에 비해 전반적으로 크기가 작은 편에 속하며, Gentoo는 몸집이 크고 지느러미가 큰 편에 속하며, Chinstrap은 Adelie보다 큰편이라고 볼 수 있음 이를 바탕으로 각 개체별 구분을 짓는 기준으로 몸무게, 지느러미, 부리순으로 평균 기준으로 진행하는 것이 합리적이다 볼 수 있음음\n각 종별 서식지를 기준으로 종별 관리가 필요함"
   }
 ]
