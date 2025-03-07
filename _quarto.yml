@@ -1,14 +1,14 @@
 project:
   type: website
-  output-dir: docs #결과물을 해당 폴더 안에 저장해줘라는 뜻뜻
+  output-dir: docs #결과물을 해당 폴더 안에 저장해줘라는 뜻
 
 website:
-  title: "newhee-blog"
+  title: "newhee-blog 어서오시죠"
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/newhee1219/newhee-blog
       - icon: twitter
         href: https://twitter.com
 format:
