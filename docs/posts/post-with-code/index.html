@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>팔머펭귄 데이터분석 – newhee-blog</title>
+<title>팔머펭귄 데이터분석 – newhee-blog 어서오시죠</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">newhee-blog</span>
+    <span class="navbar-title">newhee-blog 어서오시죠</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/newhee1219/newhee-blog"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -277,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="데이터-읽기" class="level4" data-number="1.3.2.1">
 <h4 data-number="1.3.2.1" class="anchored" data-anchor-id="데이터-읽기"><span class="header-section-number">1.3.2.1</span> 데이터 읽기</h4>
 <pre><code>- 총 343개의 데이터를 확인할 수 있으며, 총 8개의 컬럼으로 구성되어 있음</code></pre>
-<div id="d4f0c70d" class="cell" data-result="show" data-execution_count="1">
+<div id="1245c6d1" class="cell" data-result="show" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
@@ -294,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="펭귄-종-파악" class="level4" data-number="1.3.2.2">
 <h4 data-number="1.3.2.2" class="anchored" data-anchor-id="펭귄-종-파악"><span class="header-section-number">1.3.2.2</span> 펭귄 종 파악</h4>
 <pre><code>- Adelie, Gentoo, Chinstrap 종이 각각 152, 124, 68마리 데이터가 있는 것을 확인됨</code></pre>
-<div id="87dd2f9d" class="cell" data-result="show" data-execution_count="2">
+<div id="ac85c775" class="cell" data-result="show" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">'species'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -308,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>해당 결측치가 같은 행에 있음</li>
 <li>성별을 제외한 나머지 결측값이 같은 행에 있어, 그 행들을 제외하고 분석 수행.</li>
 </ul>
-<div id="d41e7267" class="cell" data-result="show" data-execution_count="3">
+<div id="e31bf0d6" class="cell" data-result="show" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins.isna().<span class="bu">sum</span>()</span>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.4" class="anchored" data-anchor-id="종별-특징-파악"><span class="header-section-number">1.4</span> 종별 특징 파악</h2>
 <section id="종별로-데이터-나누기" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="종별로-데이터-나누기"><span class="header-section-number">1.4.1</span> 종별로 데이터 나누기</h3>
-<div id="a0c3d564" class="cell" data-result="show" data-execution_count="4">
+<div id="9d470c3a" class="cell" data-result="show" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Adelie_peng <span class="op">=</span> new_penguins.loc[new_penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Adelie'</span>]</span>
@@ -340,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong><code>Adelie</code></strong>는 Dream, Torgersen, Biscoe 지역에 서식하며, <strong><code>gentoo</code></strong>는 Biscoe, <strong><code>Chinstrap</code></strong>는 Dream에 서식하고 있음</li>
 </ul>
-<div id="58169d46" class="cell" data-result="show" data-execution_count="5">
+<div id="3e4aa0ae" class="cell" data-result="show" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Adelie_peng[<span class="st">'island'</span>].value_counts().rename(<span class="st">'Adelie'</span>)</span>
@@ -355,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong><code>Adelie</code></strong> 가 평균적으로 <code>부리길이가 작은 편</code>에 속하고, <code>지느러미가 짧은 편</code>임. - <strong><code>gentoo</code></strong>가 평균적으로 부리의 길이에 비해 폭이 길고 <code>무게가 상대적으로 조금 더 나가는 편</code>이고 <code>지느러미 길이가 큰 편</code>이고 평균적으로 몸무게도 제일 많이 나감</p></li>
 <li><p><strong><code>Chinstrap</code></strong>는 지느러미 길이에서 <code>표준편차가 큰 편</code>이었음</p></li>
 </ul>
-<div id="de534754" class="cell" data-result="show" data-execution_count="6">
+<div id="77bcfb2a" class="cell" data-result="show" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Adelie_peng.describe(),<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>   <span class="co"># Adelie의 기술통계량</span></span>
@@ -494,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>각 종별 성별 개체 수 차이는 크게 나지 않음</li>
 </ul>
-<div id="7428b7f1" class="cell" data-result="show" data-execution_count="7">
+<div id="7a38901f" class="cell" data-result="show" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Adelie_peng[<span class="st">'sex'</span>].value_counts().rename(<span class="st">'Adelie'</span>)</span>
@@ -508,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>가장 많이 관찰된 년도는 <strong><code>Adelie</code></strong>는 2009년, <strong><code>gentoo</code></strong> 2008년,<strong><code>Chinstrap</code></strong>는 2007년에 가장 많았음</li>
 </ul>
-<div id="19238dd3" class="cell" data-result="show" data-execution_count="8">
+<div id="befe26cd" class="cell" data-result="show" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Adelie_peng[<span class="st">'year'</span>].value_counts().rename(<span class="st">'Adelie'</span>)</span>

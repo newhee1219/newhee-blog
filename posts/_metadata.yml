@@ -1,8 +1,11 @@
 # options specified here will apply to all posts in this folder
+# => 포스트 전체에 적용할 부분이 있다면 여기 파일에 정리하면 됨
 
 # freeze computational output
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
+# 새로운 랜더링만 업데이트 되는 형식으로 만들겠다는 뜻
+
 
 # Enable banner style title blocks
 title-block-banner: true
